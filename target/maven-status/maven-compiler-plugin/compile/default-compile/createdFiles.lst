@@ -1,0 +1,15 @@
+com\platform\exchange\exception\ErrorMessage.class
+com\platform\exchange\ExchangeApplication.class
+com\platform\exchange\service\impl\UserServiceImpl.class
+com\platform\exchange\service\UserService.class
+com\platform\exchange\repository\UserRepository.class
+com\platform\exchange\model\User.class
+com\platform\exchange\security\JWTAuthenticationFilter.class
+com\platform\exchange\security\JWTAuthorizationFilter.class
+com\platform\exchange\security\SecurityConstants.class
+com\platform\exchange\exception\ExistingUserException.class
+com\platform\exchange\security\WebSecurity.class
+com\platform\exchange\controller\UserController.class
+com\platform\exchange\exception\ControllerAdvisor.class
+com\platform\exchange\exception\UserNotFoundException.class
+com\platform\exchange\service\impl\UserDetailsServiceImpl.class
