@@ -104,6 +104,8 @@ public class User implements Serializable {
         return Objects.equals(id, user.id) &&
                Objects.equals(firstName, user.firstName) &&
                Objects.equals(lastName, user.lastName) &&
+               Objects.equals(address, user.getAddress()) &&
+               Objects.equals(phone, user.getPhone()) &&
                Objects.equals(email, user.email) &&
                Objects.equals(password, user.password);
     }
