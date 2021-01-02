@@ -18,22 +18,21 @@ public class Product implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "user_uuid")
     private User seller;
 
     private String address;
 
     private Double price;
 
-    private boolean available;
+    private Boolean available;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Feature> features;
 
     public Product() {
     }
 
-    public Product(UUID id, String name, String description, User seller, String address, Double price, boolean available) {
+    public Product(UUID id, String name, String description, User seller, String address, Double price, Boolean available) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -91,11 +90,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailable(Boolean available) {
         this.available = available;
     }
 

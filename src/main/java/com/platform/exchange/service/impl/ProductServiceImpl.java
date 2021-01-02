@@ -24,6 +24,10 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product saveProduct(Product product) {
         product.setId(UUID.randomUUID());
+        product.getFeatures().forEach(feature -> {
+            feature.setId(UUID.randomUUID());
+            feature.setProduct(product);
+        });
         return productRepository.save(product);
     }
 
@@ -65,16 +69,25 @@ public class ProductServiceImpl implements ProductService {
         if (products.size() == 0) {
             throw new OutOfProductsException(ErrorMessage.OUT_OF_PRODUCTS);
         }
-        return null;
+        return products;
     }
 
     @Override
     public List<Product> getAvailableProducts() {
-        return null;
+        List<Product> products = productRepository.findAllByAvailableIsTrue();
+        if (products.size() == 0) {
+            throw new OutOfProductsException(ErrorMessage.OUT_OF_PRODUCTS);
+        }
+        return products;
     }
 
     @Override
     public List<Product> getAvailableProductsByUserUUID(String uuid) {
-        return null;
+        User user = new User(UUID.fromString(uuid));
+        List<Product> products = productRepository.findAllByAvailableIsTrueAndSeller(user);
+        if (products.size() == 0) {
+            throw new OutOfProductsException(ErrorMessage.OUT_OF_PRODUCTS);
+        }
+        return products;
     }
 }

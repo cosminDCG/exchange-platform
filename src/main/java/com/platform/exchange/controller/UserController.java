@@ -16,7 +16,7 @@ import java.util.UUID;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<User>> getUserById(@PathVariable("userId") String userId) {

@@ -1,5 +1,7 @@
 package com.platform.exchange.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,7 +19,7 @@ public class Feature implements Serializable {
     private String value;
 
     @ManyToOne
-    @JoinColumn(name = "product_uuid")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Product product;
 
     public Feature() {
