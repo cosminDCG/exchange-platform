@@ -1,8 +1,6 @@
 package com.platform.exchange.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,16 +15,18 @@ public class Feature {
 
     private String value;
 
-    private String productUUID;
+    @ManyToOne
+    @JoinColumn(name = "product_uuid")
+    private Product product;
 
     public Feature() {
     }
 
-    public Feature(UUID id, String key, String value, String productUUID) {
+    public Feature(UUID id, String key, String value, Product product) {
         this.id = id;
         this.key = key;
         this.value = value;
-        this.productUUID = productUUID;
+        this.product = product;
     }
 
     public UUID getId() {
@@ -53,12 +53,12 @@ public class Feature {
         this.value = value;
     }
 
-    public String getProductUUID() {
-        return productUUID;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductUUID(String productUUID) {
-        this.productUUID = productUUID;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -69,11 +69,11 @@ public class Feature {
         return Objects.equals(id, feature.id) &&
                 Objects.equals(key, feature.key) &&
                 Objects.equals(value, feature.value) &&
-                Objects.equals(productUUID, feature.productUUID);
+                Objects.equals(product, feature.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, key, value, productUUID);
+        return Objects.hash(id, key, value, product);
     }
 }

@@ -1,8 +1,7 @@
 package com.platform.exchange.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,7 +16,9 @@ public class Product {
 
     private String description;
 
-    private String seller;
+    @ManyToOne
+    @JoinColumn(name = "user_uuid")
+    private User seller;
 
     private String address;
 
@@ -25,10 +26,13 @@ public class Product {
 
     private boolean available;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Feature> features;
+
     public Product() {
     }
 
-    public Product(UUID id, String name, String description, String seller, String address, Double price, boolean available) {
+    public Product(UUID id, String name, String description, User seller, String address, Double price, boolean available) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -62,11 +66,11 @@ public class Product {
         this.description = description;
     }
 
-    public String getSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    public void setSeller(String seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
     }
 
@@ -92,6 +96,14 @@ public class Product {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public List<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(List<Feature> features) {
+        this.features = features;
     }
 
     @Override
