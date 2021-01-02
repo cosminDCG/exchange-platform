@@ -1,12 +1,13 @@
 package com.platform.exchange.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "feature")
-public class Feature {
+public class Feature implements Serializable {
 
     @Id
     private UUID id;
