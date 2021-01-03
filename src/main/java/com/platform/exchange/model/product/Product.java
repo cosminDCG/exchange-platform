@@ -1,4 +1,7 @@
-package com.platform.exchange.model;
+package com.platform.exchange.model.product;
+
+import com.platform.exchange.model.Feature;
+import com.platform.exchange.model.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +15,9 @@ public class Product implements Serializable {
 
     @Id
     private UUID id;
+
+    @Enumerated(EnumType.STRING)
+    private ProductType type;
 
     private String name;
 
@@ -32,8 +38,9 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(UUID id, String name, String description, User seller, String address, Double price, Boolean available) {
+    public Product(UUID id, String name, String description, User seller, String address, Double price, Boolean available, ProductType type) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.description = description;
         this.seller = seller;
@@ -48,6 +55,14 @@ public class Product implements Serializable {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
     }
 
     public String getName() {

@@ -1,6 +1,7 @@
 package com.platform.exchange.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.platform.exchange.model.product.Product;
 
 import javax.persistence.*;
 import java.io.Serializable;

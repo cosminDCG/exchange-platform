@@ -1,7 +1,7 @@
 package com.platform.exchange.service.impl;
 
 import com.platform.exchange.exception.ErrorMessage;
-import com.platform.exchange.exception.UserNotFoundException;
+import com.platform.exchange.exception.user.UserNotFoundException;
 import com.platform.exchange.model.User;
 import com.platform.exchange.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

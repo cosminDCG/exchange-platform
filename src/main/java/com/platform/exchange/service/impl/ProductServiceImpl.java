@@ -1,12 +1,14 @@
 package com.platform.exchange.service.impl;
 
 import com.platform.exchange.exception.ErrorMessage;
-import com.platform.exchange.exception.OutOfProductsException;
-import com.platform.exchange.exception.ProductNotFoundException;
-import com.platform.exchange.model.Product;
+import com.platform.exchange.exception.product.OutOfProductsException;
+import com.platform.exchange.exception.product.ProductNotFoundException;
+import com.platform.exchange.model.product.Product;
 import com.platform.exchange.model.User;
 import com.platform.exchange.repository.ProductRepository;
 import com.platform.exchange.service.ProductService;
+import com.platform.exchange.validator.product.ProductValidator;
+import com.platform.exchange.validator.product.ProductValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public Product saveProduct(Product product) {
+        ProductValidator validator = ProductValidatorFactory.getValidator(product.getType());
+        validator.validate(product);
+
         product.setId(UUID.randomUUID());
         product.getFeatures().forEach(feature -> {
             feature.setId(UUID.randomUUID());
@@ -42,6 +47,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public Product updateProduct(Product product) {
+        ProductValidator validator = ProductValidatorFactory.getValidator(product.getType());
+        validator.validate(product);
+
         productRepository.findById(product.getId())
                          .orElseThrow(() -> new ProductNotFoundException(ErrorMessage.PRODUCT_NOT_FOUND));
         return productRepository.save(product);

@@ -1,6 +1,6 @@
 package com.platform.exchange.service;
 
-import com.platform.exchange.model.Product;
+import com.platform.exchange.model.product.Product;
 
 import java.util.List;
 

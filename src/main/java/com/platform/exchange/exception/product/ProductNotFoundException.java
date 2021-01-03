@@ -1,4 +1,6 @@
-package com.platform.exchange.exception;
+package com.platform.exchange.exception.product;
+
+import com.platform.exchange.exception.ErrorMessage;
 
 public class ProductNotFoundException extends RuntimeException {
 
