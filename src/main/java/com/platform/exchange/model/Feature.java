@@ -33,6 +33,11 @@ public class Feature implements Serializable {
         this.product = product;
     }
 
+    public Feature(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
     public UUID getId() {
         return id;
     }

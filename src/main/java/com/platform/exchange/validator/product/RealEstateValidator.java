@@ -20,6 +20,7 @@ public class RealEstateValidator extends ProductValidator {
     @Override
     public void validate(Product product) {
         validatePrice(product);
+        validateDescription(product);
         validateMandatoryFeatures(product);
     }
 

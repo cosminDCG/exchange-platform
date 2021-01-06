@@ -5,6 +5,7 @@ import com.platform.exchange.model.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -36,6 +37,18 @@ public class Product implements Serializable {
     private List<Feature> features;
 
     public Product() {
+    }
+
+    public Product(ProductBuilder builder) {
+        this.id = builder.id;
+        this.type = builder.type;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.seller = builder.seller;
+        this.address = builder.address;
+        this.price = builder.price;
+        this.available = builder.available;
+        this.features = builder.features;
     }
 
     public Product(UUID id, String name, String description, User seller, String address, Double price, Boolean available, ProductType type) {
@@ -105,7 +118,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public Boolean isAvailable() {
+    public Boolean getAvailable() {
         return available;
     }
 
@@ -138,5 +151,81 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, seller, address, price, available);
+    }
+
+    public static class ProductBuilder {
+
+        private UUID id;
+        private ProductType type;
+        private String name;
+        private String description;
+        private String address;
+        private User seller;
+        private Double price;
+        private Boolean available;
+        private List<Feature> features;
+
+        public ProductBuilder(ProductType type, String name, Double price) {
+            this.type = type;
+            this.name = name;
+            this.price = price;
+        }
+
+        public ProductBuilder withId(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProductBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ProductBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public ProductBuilder withAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public ProductBuilder withSeller(User seller) {
+            this.seller = seller;
+            return this;
+        }
+
+        public ProductBuilder withPrice(Double price) {
+            this.price = price;
+            return this;
+        }
+
+        public ProductBuilder setAvailability(Boolean available) {
+            this.available = available;
+            return this;
+        }
+
+        public ProductBuilder setFeatures(List<Feature> features) {
+            this.features = features;
+            return this;
+        }
+
+        public ProductBuilder addFeature(Feature feature) {
+            if (this.features == null) {
+                this.features = new ArrayList<>();
+            }
+            this.features.add(feature);
+            return this;
+        }
+
+        public ProductBuilder removeFeature(String key) {
+            this.features.removeIf(f -> f.getKey().equals(key));
+            return this;
+        }
+
+        public Product build() {
+            return new Product(this);
+        }
     }
 }

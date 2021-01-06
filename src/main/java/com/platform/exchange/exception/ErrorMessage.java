@@ -8,7 +8,8 @@ public enum ErrorMessage {
     OUT_OF_PRODUCTS("No product could be found!"),
     FEATURE_NOT_FOUND("The feature could not be found!"),
     MANDATORY_FEATURE_NOT_FOUND("The following feature is mandatory:"),
-    NEGATIVE_PRICE("The price must be positive!");
+    NEGATIVE_PRICE("The price must be positive!"),
+    INVALID_DESCRIPTION("If added, description should have a length less than 100 characters");
 
     private final String message;
 

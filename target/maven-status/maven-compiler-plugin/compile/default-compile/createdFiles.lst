@@ -1,6 +1,7 @@
 com\platform\exchange\exception\product\OutOfProductsException.class
 com\platform\exchange\service\impl\FeatureServiceImpl.class
 com\platform\exchange\service\impl\ProductServiceImpl.class
+com\platform\exchange\model\product\Product$ProductBuilder.class
 com\platform\exchange\exception\feature\MandatoryFeatureException.class
 com\platform\exchange\validator\product\ProductValidatorFactory$1.class
 com\platform\exchange\repository\ProductRepository.class
