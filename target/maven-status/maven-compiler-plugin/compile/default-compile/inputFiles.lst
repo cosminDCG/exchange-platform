@@ -18,6 +18,7 @@ D:\Projects\exchange-platform\src\main\java\com\platform\exchange\exception\user
 D:\Projects\exchange-platform\src\main\java\com\platform\exchange\exception\product\OutOfProductsException.java
 D:\Projects\exchange-platform\src\main\java\com\platform\exchange\model\product\Product.java
 D:\Projects\exchange-platform\src\main\java\com\platform\exchange\validator\product\ValidatorBase.java
+D:\Projects\exchange-platform\src\main\java\com\platform\exchange\exception\product\InvalidDescriptionException.java
 D:\Projects\exchange-platform\src\main\java\com\platform\exchange\exception\feature\FeatureNotFoundException.java
 D:\Projects\exchange-platform\src\main\java\com\platform\exchange\exception\ControllerAdvisor.java
 D:\Projects\exchange-platform\src\main\java\com\platform\exchange\controller\UserController.java

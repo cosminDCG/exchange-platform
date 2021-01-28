@@ -5,10 +5,7 @@ import com.platform.exchange.model.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "product")
@@ -39,7 +36,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(ProductBuilder builder) {
+    private Product(ProductBuilder builder) {
         this.id = builder.id;
         this.type = builder.type;
         this.name = builder.name;
@@ -49,17 +46,6 @@ public class Product implements Serializable {
         this.price = builder.price;
         this.available = builder.available;
         this.features = builder.features;
-    }
-
-    public Product(UUID id, String name, String description, User seller, String address, Double price, Boolean available, ProductType type) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.description = description;
-        this.seller = seller;
-        this.address = address;
-        this.price = price;
-        this.available = available;
     }
 
     public UUID getId() {

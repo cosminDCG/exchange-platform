@@ -9,7 +9,8 @@ public enum ErrorMessage {
     FEATURE_NOT_FOUND("The feature could not be found!"),
     MANDATORY_FEATURE_NOT_FOUND("The following feature is mandatory:"),
     NEGATIVE_PRICE("The price must be positive!"),
-    INVALID_DESCRIPTION("If added, description should have a length less than 100 characters");
+    INVALID_DESCRIPTION("If added, description should have a length less than 100 characters!"),
+    MEETING_NOT_FOUND("The meeting could not be found!");
 
     private final String message;
 

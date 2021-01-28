@@ -29,6 +29,7 @@ com\platform\exchange\service\UserService.class
 com\platform\exchange\model\product\ProductType.class
 com\platform\exchange\model\User.class
 com\platform\exchange\security\JWTAuthenticationFilter.class
+com\platform\exchange\exception\product\InvalidDescriptionException.class
 com\platform\exchange\exception\user\ExistingUserException.class
 com\platform\exchange\exception\product\NegativePriceException.class
 com\platform\exchange\model\Feature.class
