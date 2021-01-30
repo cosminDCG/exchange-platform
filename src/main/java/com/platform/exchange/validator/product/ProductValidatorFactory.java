@@ -5,10 +5,15 @@ import com.platform.exchange.model.product.ProductType;
 public final class ProductValidatorFactory {
 
     public static ProductValidator getValidator(ProductType productType) {
-        return switch (productType) {
-            case REGULAR -> new ProductValidator();
-            case AUTO -> new AutoValidator();
-            case REAL_ESTATE -> new RealEstateValidator();
-        };
+         switch (productType) {
+             case REGULAR:
+                 return new ProductValidator();
+             case AUTO:
+                 return new AutoValidator();
+             case REAL_ESTATE:
+                 return new RealEstateValidator();
+             default:
+                 return null;
+        }
     }
 }
