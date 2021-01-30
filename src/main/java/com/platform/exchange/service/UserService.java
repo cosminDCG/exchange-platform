@@ -2,6 +2,8 @@ package com.platform.exchange.service;
 
 import com.platform.exchange.model.User;
 
+import java.util.List;
+
 public interface UserService {
 
     User saveUser(User user);
@@ -11,4 +13,6 @@ public interface UserService {
     User updateUser(User user);
 
     User getUser(String uuid);
+
+    List<User> getAllUsers();
 }

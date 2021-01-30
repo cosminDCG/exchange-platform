@@ -18,7 +18,7 @@ public interface ProductService {
 
     List<Product> getProductsByUserUUID(String uuid);
 
-    List<Product> getAvailableProducts();
+    List<Product> getAvailableProducts(String uuid);
 
     List<Product> getAvailableProductsByUserUUID(String uuid);
 }

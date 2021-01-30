@@ -6,10 +6,13 @@ import com.platform.exchange.exception.product.ProductNotFoundException;
 import com.platform.exchange.model.product.Product;
 import com.platform.exchange.model.User;
 import com.platform.exchange.repository.ProductRepository;
+import com.platform.exchange.security.CustomUserDetails;
 import com.platform.exchange.service.ProductService;
 import com.platform.exchange.validator.product.ProductValidator;
 import com.platform.exchange.validator.product.ProductValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -81,8 +84,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAvailableProducts() {
-        List<Product> products = productRepository.findAllByAvailableIsTrue();
+    public List<Product> getAvailableProducts(String uuid) {
+        User user = new User(UUID.fromString(uuid));
+        List<Product> products = productRepository.findAllByAvailableIsTrueAndSellerIsNot(user);
         if (products.size() == 0) {
             throw new OutOfProductsException(ErrorMessage.OUT_OF_PRODUCTS);
         }

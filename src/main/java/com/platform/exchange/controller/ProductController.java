@@ -63,8 +63,8 @@ public class ProductController {
     }
 
     @GetMapping(path = "/available", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<ResponseEntity<List<Product>>> getAvailableProducts() {
-        return Mono.fromCallable(() -> productService.getAvailableProducts())
+    public Mono<ResponseEntity<List<Product>>> getAvailableProducts(@RequestParam String userId) {
+        return Mono.fromCallable(() -> productService.getAvailableProducts(userId))
                 .subscribeOn(Schedulers.boundedElastic())
                 .map(ResponseEntity::ok);
     }

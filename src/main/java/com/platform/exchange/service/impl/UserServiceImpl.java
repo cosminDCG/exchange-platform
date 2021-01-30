@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -49,7 +50,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User getUser(String uuid) {
         return userRepository.findById(UUID.fromString(uuid)).orElseThrow(() -> new UserNotFoundException(ErrorMessage.USER_NOT_FOUND));
+    }
+
+    @Override
+    @Transactional
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

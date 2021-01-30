@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,6 +22,13 @@ public class UserController {
     @GetMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<User>> getUserById(@PathVariable("userId") String userId) {
         return Mono.fromCallable(() -> userService.getUser(userId))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(ResponseEntity::ok);
+    }
+
+    @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseEntity<List<User>>> getAllUsers() {
+        return Mono.fromCallable(() -> userService.getAllUsers())
                 .subscribeOn(Schedulers.boundedElastic())
                 .map(ResponseEntity::ok);
     }

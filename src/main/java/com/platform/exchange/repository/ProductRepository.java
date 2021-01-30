@@ -13,7 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     List<Product> findAllBySeller(User user);
 
-    List<Product> findAllByAvailableIsTrue();
+    List<Product> findAllByAvailableIsTrueAndSellerIsNot(User user);
 
     List<Product> findAllByAvailableIsTrueAndSeller(User user);
 }

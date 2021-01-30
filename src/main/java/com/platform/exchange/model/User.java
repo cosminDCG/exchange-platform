@@ -1,6 +1,8 @@
 package com.platform.exchange.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.platform.exchange.security.CustomUserDetails;
+import org.springframework.security.core.Authentication;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -42,6 +44,15 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    public User(CustomUserDetails customUserDetails) {
+        this.id = UUID.fromString(customUserDetails.getId());
+        this.firstName = customUserDetails.getFirstName();
+        this.lastName = customUserDetails.getLastName();
+        this.email = customUserDetails.getAddress();
+        this.address = customUserDetails.getAddress();
+        this.phone = customUserDetails.getPhone();
     }
 
     public UUID getId() {
