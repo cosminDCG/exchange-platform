@@ -2,7 +2,6 @@ package com.platform.exchange.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.platform.exchange.security.CustomUserDetails;
-import org.springframework.security.core.Authentication;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

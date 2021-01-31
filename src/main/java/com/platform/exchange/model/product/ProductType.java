@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum ProductType {
 
-    REGULAR("regular"),
-    AUTO("auto"),
-    REAL_ESTATE("real-estate");
+    OTHER("Other"),
+    AUTO("Auto"),
+    REAL_ESTATE("Real Estate");
 
     private final String type;
 

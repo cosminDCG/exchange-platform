@@ -34,8 +34,8 @@ public class ProductValidatorTest {
 
     @Test
     public void validateProduct_negativePrice() {
-        Product product = new Product.ProductBuilder(ProductType.REGULAR, "product-name", -1.0).build();
-        ProductValidator validator = ProductValidatorFactory.getValidator(ProductType.REGULAR);
+        Product product = new Product.ProductBuilder(ProductType.OTHER, "product-name", -1.0).build();
+        ProductValidator validator = ProductValidatorFactory.getValidator(ProductType.OTHER);
         Exception exception = assertThrows(NegativePriceException.class, () -> validator.validate(product));
 
         assertEquals(exception.getMessage(), ErrorMessage.NEGATIVE_PRICE.getMessage());
@@ -46,9 +46,9 @@ public class ProductValidatorTest {
         byte[] array = new byte[1001];
         new Random().nextBytes(array);
         String description = new String(array, StandardCharsets.UTF_8);
-        Product product = new Product.ProductBuilder(ProductType.REGULAR, PRODUCT_NAME, 22.0)
+        Product product = new Product.ProductBuilder(ProductType.OTHER, PRODUCT_NAME, 22.0)
                                      .withDescription(description).build();
-        ProductValidator validator = ProductValidatorFactory.getValidator(ProductType.REGULAR);
+        ProductValidator validator = ProductValidatorFactory.getValidator(ProductType.OTHER);
         Exception exception = assertThrows(InvalidDescriptionException.class, () -> validator.validate(product));
 
         assertEquals(exception.getMessage(), ErrorMessage.INVALID_DESCRIPTION.getMessage());

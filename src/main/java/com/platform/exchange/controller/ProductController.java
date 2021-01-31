@@ -1,6 +1,7 @@
 package com.platform.exchange.controller;
 
 import com.platform.exchange.model.product.Product;
+import com.platform.exchange.service.ProductLocatorService;
 import com.platform.exchange.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +19,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductLocatorService productLocatorService;
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<Product>> createProduct(@RequestBody Product product) {
@@ -65,6 +69,13 @@ public class ProductController {
     @GetMapping(path = "/available", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<List<Product>>> getAvailableProducts(@RequestParam String userId) {
         return Mono.fromCallable(() -> productService.getAvailableProducts(userId))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(ResponseEntity::ok);
+    }
+
+    @GetMapping(path = "/range", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseEntity<List<Product>>> getProductsInRange(@RequestParam String userAddress, @RequestParam int range) {
+        return Mono.fromCallable(() -> productLocatorService.getProductsByRange(userAddress, range))
                 .subscribeOn(Schedulers.boundedElastic())
                 .map(ResponseEntity::ok);
     }

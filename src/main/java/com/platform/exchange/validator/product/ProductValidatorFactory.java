@@ -6,7 +6,7 @@ public final class ProductValidatorFactory {
 
     public static ProductValidator getValidator(ProductType productType) {
          switch (productType) {
-             case REGULAR:
+             case OTHER:
                  return new ProductValidator();
              case AUTO:
                  return new AutoValidator();

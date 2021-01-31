@@ -15,6 +15,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static com.platform.exchange.security.SecurityConstants.SIGN_UP_URL;
 
@@ -48,7 +49,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         source.registerCorsConfiguration("/**", config.applyPermitDefaultValues());
-        config.setExposedHeaders(Arrays.asList("Authorization"));
+        config.setExposedHeaders(Collections.singletonList("Authorization"));
         return source;
     }
 }
