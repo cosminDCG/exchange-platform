@@ -15,7 +15,7 @@ public class AutoValidator extends ProductValidator {
     private static final String MODEL = "model";
     private static final String KILOMETERS = "kilometers";
     private static final String FUEL = "fuel";
-    private static final String CUBIC_CAPACITY = "cubic-capacity";
+    private static final String CUBIC_CAPACITY = "cubic capacity";
 
     private static final String[] MANDATORY_FEATURES = {YEAR, BRAND, MODEL, KILOMETERS, FUEL, CUBIC_CAPACITY};
 

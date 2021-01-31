@@ -29,7 +29,7 @@ public class ProductValidatorTest {
     private static final String TEST_KILOMETERS = "test-kilometers";
     private static final String FUEL = "fuel";
     private static final String TEST_FUEL = "test-fuel";
-    private static final String CUBIC_CAPACITY = "cubic-capacity";
+    private static final String CUBIC_CAPACITY = "cubic capacity";
     private static final String TEST_CUBIC_CAPACITY = "test-cubic-capacity";
 
     @Test

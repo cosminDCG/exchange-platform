@@ -12,7 +12,7 @@ public class RealEstateValidator extends ProductValidator {
 
     private static final String YEAR = "year";
     private static final String ROOMS = "rooms";
-    private static final String PARK_SLOT = "park-slot";
+    private static final String PARK_SLOT = "park slot";
     private static final String DIMENSION = "dimension";
 
     private static final String[] MANDATORY_FEATURES = {YEAR, ROOMS, PARK_SLOT, DIMENSION};

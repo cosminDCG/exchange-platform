@@ -1,6 +1,7 @@
 package com.platform.exchange.controller;
 
 import com.platform.exchange.model.Feature;
+import com.platform.exchange.model.product.ProductType;
 import com.platform.exchange.service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -38,5 +40,12 @@ public class FeatureController {
         return Mono.fromRunnable(() -> featureService.deleteFeature(featureId))
                 .subscribeOn(Schedulers.boundedElastic())
                 .thenReturn(ResponseEntity.accepted().build());
+    }
+
+    @GetMapping(path = "/mandatory")
+    public Mono<ResponseEntity<List<String>>> getMandatoryFields(@RequestParam String type) {
+        return Mono.fromCallable(() -> featureService.getMandatoryFieldsForProduct(ProductType.fromText(type)))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(ResponseEntity::ok);
     }
 }

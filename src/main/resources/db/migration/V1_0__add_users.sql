@@ -1,4 +1,3 @@
-
 CREATE SCHEMA IF NOT EXISTS dbfortest;
 create table if not exists feature (id binary not null, key varchar(255), value varchar(255), product_id binary, primary key (id));
 create table if not exists meeting (id binary not null, approved boolean not null, date timestamp, location varchar(255), buyer_id binary, seller_id binary, primary key (id));
