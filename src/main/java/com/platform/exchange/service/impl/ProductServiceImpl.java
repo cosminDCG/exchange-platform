@@ -3,16 +3,13 @@ package com.platform.exchange.service.impl;
 import com.platform.exchange.exception.ErrorMessage;
 import com.platform.exchange.exception.product.OutOfProductsException;
 import com.platform.exchange.exception.product.ProductNotFoundException;
-import com.platform.exchange.model.product.Product;
 import com.platform.exchange.model.User;
+import com.platform.exchange.model.product.Product;
 import com.platform.exchange.repository.ProductRepository;
-import com.platform.exchange.security.CustomUserDetails;
 import com.platform.exchange.service.ProductService;
 import com.platform.exchange.validator.product.ProductValidator;
 import com.platform.exchange.validator.product.ProductValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

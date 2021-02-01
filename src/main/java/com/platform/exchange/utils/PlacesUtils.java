@@ -10,10 +10,20 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service
-public class PlacesUtils {
+public final class PlacesUtils {
+
+    private static PlacesUtils INSTANCE;
 
     public static final String PLACES_API_KEY = "PLACES_API_KEY";
+
+    private PlacesUtils() {}
+
+    public static PlacesUtils getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new PlacesUtils();
+        }
+        return INSTANCE;
+    }
 
     public Coordinates getAddressCoordinate(String address) throws InterruptedException, ApiException, IOException {
         GeoApiContext context = new GeoApiContext.Builder()

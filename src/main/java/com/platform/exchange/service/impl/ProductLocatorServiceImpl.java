@@ -19,8 +19,7 @@ public class ProductLocatorServiceImpl implements ProductLocatorService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private PlacesUtils placesUtils;
+    private final PlacesUtils placesUtils = PlacesUtils.getInstance();
     
     @Override
     public List<Product> getProductsByRange(String userAddress, int range) throws InterruptedException, ApiException, IOException {
