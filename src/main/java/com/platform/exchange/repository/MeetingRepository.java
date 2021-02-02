@@ -12,7 +12,9 @@ import java.util.UUID;
 @Repository
 public interface MeetingRepository extends JpaRepository<Meeting, UUID> {
 
-    List<Meeting> findAllBySellerOrBuyerAndDateAfter(User seller, User buyer, Date date);
+    List<Meeting> findAllBySellerOrBuyerAndDateGreaterThan(User seller, User buyer, Date date);
 
-    List<Meeting> findAllBySellerOrBuyerAndDateBefore(User seller, User buyer, Date date);
+    List<Meeting> findAllBySellerOrBuyerAndDateLessThan(User seller, User buyer, Date date);
+
+    List<Meeting> findAllBySellerOrBuyer(User seller, User buyer);
 }

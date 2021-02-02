@@ -14,7 +14,11 @@ public interface MeetingService {
 
     List<Meeting> getPreviousMeetingsByUser(String uuid);
 
-    void respondToMeeting(String uuid, boolean response);
+    List<Meeting> getAllMeetingsByUser(String uuid);
+
+    Meeting respondToMeeting(String uuid, boolean response);
 
     Meeting updateMeeting(Meeting meeting);
+
+    Meeting failureMeeting(String uuid);
 }

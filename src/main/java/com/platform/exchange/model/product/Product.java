@@ -30,6 +30,8 @@ public class Product implements Serializable {
 
     private Boolean available;
 
+    private String image;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Feature> features;
 
@@ -118,6 +120,14 @@ public class Product implements Serializable {
 
     public void setFeatures(List<Feature> features) {
         this.features = features;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
