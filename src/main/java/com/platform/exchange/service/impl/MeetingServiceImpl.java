@@ -84,14 +84,13 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     @Transactional
-    public Meeting failureMeeting(String uuid) {
+    public void failureMeeting(String uuid) {
         Meeting meeting = meetingRepository.findById(UUID.fromString(uuid))
                 .orElseThrow(() -> new MeetingNotFoundException(ErrorMessage.MEETING_NOT_FOUND));
-        meeting.setApproved(false);
         meeting.getProduct().setAvailable(true);
 
         productRepository.save(meeting.getProduct());
-        return meetingRepository.save(meeting);
+        meetingRepository.delete(meeting);
     }
 
     @Override

@@ -43,9 +43,9 @@ public class MeetingController {
 
     @PostMapping(value = "/{meetingId}/failure", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<Meeting>> failureMeeting(@PathVariable("meetingId") String meetingId) {
-        return Mono.fromCallable(() -> meetingService.failureMeeting(meetingId))
+        return Mono.fromRunnable(() -> meetingService.failureMeeting(meetingId))
                 .subscribeOn(Schedulers.boundedElastic())
-                .map(ResponseEntity::ok);
+                .thenReturn(ResponseEntity.accepted().build());
     }
 
     @DeleteMapping(value = "/{meetingId}", produces = MediaType.APPLICATION_JSON_VALUE)

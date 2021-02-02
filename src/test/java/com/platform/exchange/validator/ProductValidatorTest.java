@@ -133,7 +133,7 @@ public class ProductValidatorTest {
         ProductValidator validator = ProductValidatorFactory.getValidator(ProductType.AUTO);
         Exception exception = assertThrows(MandatoryFeatureException.class, () -> validator.validate(product));
 
-        assertEquals(exception.getMessage(), ErrorMessage.MANDATORY_FEATURE_NOT_FOUND.getMessage() + " cubic-capacity");
+        assertEquals(exception.getMessage(), ErrorMessage.MANDATORY_FEATURE_NOT_FOUND.getMessage() + " cubic capacity");
     }
 
     @Test

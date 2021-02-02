@@ -20,5 +20,5 @@ public interface MeetingService {
 
     Meeting updateMeeting(Meeting meeting);
 
-    Meeting failureMeeting(String uuid);
+    void failureMeeting(String uuid);
 }
