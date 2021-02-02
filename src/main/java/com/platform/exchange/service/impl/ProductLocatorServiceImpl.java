@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,9 @@ public class ProductLocatorServiceImpl implements ProductLocatorService {
     public List<Product> getProductsByRange(String userAddress, int range) throws InterruptedException, ApiException, IOException {
         List<Product> products = productRepository.findAll();
         Coordinates userCoordinates = placesUtils.getAddressCoordinate(userAddress);
+        if (products.size() == 0) {
+            return Collections.emptyList();
+        }
         return products.stream().filter(product -> {
             try {
                 return productIsInRange(userCoordinates, placesUtils.getAddressCoordinate(product.getAddress()), range);

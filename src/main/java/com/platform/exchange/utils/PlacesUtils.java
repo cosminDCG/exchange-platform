@@ -1,12 +1,9 @@
 package com.platform.exchange.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
