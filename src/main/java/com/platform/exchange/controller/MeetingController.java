@@ -34,6 +34,20 @@ public class MeetingController {
                 .map(ResponseEntity::ok);
     }
 
+    @PostMapping(value = "/{meetingId}/respond", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseEntity<Meeting>> approveMeeting(@PathVariable("meetingId") String meetingId, @RequestParam boolean response) {
+        return Mono.fromCallable(() -> meetingService.respondToMeeting(meetingId, response))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/{meetingId}/failure", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseEntity<Meeting>> failureMeeting(@PathVariable("meetingId") String meetingId) {
+        return Mono.fromRunnable(() -> meetingService.failureMeeting(meetingId))
+                .subscribeOn(Schedulers.boundedElastic())
+                .thenReturn(ResponseEntity.accepted().build());
+    }
+
     @DeleteMapping(value = "/{meetingId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<Void>> deleteMeeting(@PathVariable("meetingId") String meetingId) {
         return Mono.fromRunnable(() -> meetingService.deleteMeeting(meetingId))
@@ -51,6 +65,13 @@ public class MeetingController {
     @GetMapping(path = "/upcoming/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<List<Meeting>>> getUpcomingMeetings(@PathVariable("userId") String userId) {
         return Mono.fromCallable(() -> meetingService.getUpcomingMeetingsByUser(userId))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(ResponseEntity::ok);
+    }
+
+    @GetMapping(path = "/user/{userId}/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseEntity<List<Meeting>>> allMeetings(@PathVariable("userId") String userId) {
+        return Mono.fromCallable(() -> meetingService.getAllMeetingsByUser(userId))
                 .subscribeOn(Schedulers.boundedElastic())
                 .map(ResponseEntity::ok);
     }

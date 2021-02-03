@@ -1,10 +1,15 @@
 package com.platform.exchange.model;
 
+import com.platform.exchange.model.product.Product;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,6 +26,9 @@ public class Meeting implements Serializable {
 
     @ManyToOne
     private User buyer;
+
+    @ManyToOne
+    private Product product;
 
     private Date date;
 
@@ -82,6 +90,14 @@ public class Meeting implements Serializable {
 
     public boolean isApproved() {
         return approved;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public void setApproved(boolean approved) {

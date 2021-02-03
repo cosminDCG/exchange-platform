@@ -5,7 +5,9 @@ import com.platform.exchange.exception.meeting.MeetingNotFoundException;
 import com.platform.exchange.exception.user.UserNotFoundException;
 import com.platform.exchange.model.Meeting;
 import com.platform.exchange.model.User;
+import com.platform.exchange.model.product.Product;
 import com.platform.exchange.repository.MeetingRepository;
+import com.platform.exchange.repository.ProductRepository;
 import com.platform.exchange.repository.UserRepository;
 import com.platform.exchange.service.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     @Transactional
@@ -46,7 +51,7 @@ public class MeetingServiceImpl implements MeetingService {
     public List<Meeting> getUpcomingMeetingsByUser(String uuid) {
         User user = userRepository.findById(UUID.fromString(uuid))
                                   .orElseThrow(() -> new UserNotFoundException(ErrorMessage.USER_NOT_FOUND));
-        return meetingRepository.findAllBySellerOrBuyerAndDateAfter(user, user, Date.from(Instant.now()));
+        return meetingRepository.findAllBySellerOrBuyerAndDateGreaterThan(user, user, Date.from(Instant.now()));
     }
 
     @Override
@@ -54,16 +59,38 @@ public class MeetingServiceImpl implements MeetingService {
     public List<Meeting> getPreviousMeetingsByUser(String uuid) {
         User user = userRepository.findById(UUID.fromString(uuid))
                 .orElseThrow(() -> new UserNotFoundException(ErrorMessage.USER_NOT_FOUND));
-        return meetingRepository.findAllBySellerOrBuyerAndDateBefore(user, user, Date.from(Instant.now()));
+        return meetingRepository.findAllBySellerOrBuyerAndDateLessThan(user, user, Date.from(Instant.now()));
     }
 
     @Override
     @Transactional
-    public void respondToMeeting(String uuid, boolean response) {
+    public List<Meeting> getAllMeetingsByUser(String uuid) {
+        User user = userRepository.findById(UUID.fromString(uuid))
+                .orElseThrow(() -> new UserNotFoundException(ErrorMessage.USER_NOT_FOUND));
+        return meetingRepository.findAllBySellerOrBuyer(user, user);
+    }
+
+    @Override
+    @Transactional
+    public Meeting respondToMeeting(String uuid, boolean response) {
         Meeting meeting = meetingRepository.findById(UUID.fromString(uuid))
                                            .orElseThrow(() -> new MeetingNotFoundException(ErrorMessage.MEETING_NOT_FOUND));
         meeting.setApproved(response);
-        meetingRepository.save(meeting);
+        meeting.getProduct().setAvailable(!response);
+
+        productRepository.save(meeting.getProduct());
+        return meetingRepository.save(meeting);
+    }
+
+    @Override
+    @Transactional
+    public void failureMeeting(String uuid) {
+        Meeting meeting = meetingRepository.findById(UUID.fromString(uuid))
+                .orElseThrow(() -> new MeetingNotFoundException(ErrorMessage.MEETING_NOT_FOUND));
+        meeting.getProduct().setAvailable(true);
+
+        productRepository.save(meeting.getProduct());
+        meetingRepository.delete(meeting);
     }
 
     @Override

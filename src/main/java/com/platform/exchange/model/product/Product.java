@@ -30,6 +30,8 @@ public class Product implements Serializable {
 
     private Boolean available;
 
+    private String image;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Feature> features;
 
@@ -120,6 +122,14 @@ public class Product implements Serializable {
         this.features = features;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -157,16 +167,6 @@ public class Product implements Serializable {
             this.price = price;
         }
 
-        public ProductBuilder withId(UUID id) {
-            this.id = id;
-            return this;
-        }
-
-        public ProductBuilder withName(String name) {
-            this.name = name;
-            return this;
-        }
-
         public ProductBuilder withDescription(String description) {
             this.description = description;
             return this;
@@ -179,11 +179,6 @@ public class Product implements Serializable {
 
         public ProductBuilder withSeller(User seller) {
             this.seller = seller;
-            return this;
-        }
-
-        public ProductBuilder withPrice(Double price) {
-            this.price = price;
             return this;
         }
 
