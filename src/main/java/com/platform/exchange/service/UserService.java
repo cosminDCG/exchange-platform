@@ -15,4 +15,6 @@ public interface UserService {
     User getUser(String uuid);
 
     List<User> getAllUsers();
+
+    List<User> getAllUsersButMe(String uuid);
 }

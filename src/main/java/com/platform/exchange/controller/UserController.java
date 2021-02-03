@@ -33,6 +33,13 @@ public class UserController {
                 .map(ResponseEntity::ok);
     }
 
+    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseEntity<List<User>>> getAllUsersButMe(@RequestParam String id) {
+        return Mono.fromCallable(() -> userService.getAllUsersButMe(id))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(ResponseEntity::ok);
+    }
+
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<User>> createUser(@RequestBody User user) {
         return Mono.fromCallable(() -> userService.saveUser(user))

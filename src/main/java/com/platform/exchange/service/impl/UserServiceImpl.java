@@ -1,9 +1,11 @@
 package com.platform.exchange.service.impl;
 
 import com.platform.exchange.exception.ErrorMessage;
+import com.platform.exchange.exception.product.OutOfProductsException;
 import com.platform.exchange.exception.user.ExistingUserException;
 import com.platform.exchange.exception.user.UserNotFoundException;
 import com.platform.exchange.model.User;
+import com.platform.exchange.model.product.Product;
 import com.platform.exchange.repository.UserRepository;
 import com.platform.exchange.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,5 +62,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> getAllUsersButMe(String uuid) {
+        List<User> users = userRepository.findAllByIdIsNot(UUID.fromString(uuid));
+        if (users.size() == 0) {
+            return Collections.emptyList();
+        }
+        return users;
     }
 }
