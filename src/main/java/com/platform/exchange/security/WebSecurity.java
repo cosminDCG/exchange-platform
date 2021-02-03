@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static com.platform.exchange.security.SecurityConstants.SIGN_UP_URL;
+import static com.platform.exchange.security.SecurityConstants.WEB_SOCKET_URL;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -32,6 +33,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .antMatchers(WEB_SOCKET_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))

@@ -12,6 +12,8 @@ public class SecurityConstants {
 
     public static final String SIGN_UP_URL = "/api/users/register";
 
+    public static final String WEB_SOCKET_URL = "/socket/app/chat";
+
     public static final String APPLICATION_JSON_HEADER = "application/json";
 
     public static final String ENCODING = "UTF-8";
